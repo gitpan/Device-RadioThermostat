@@ -4,11 +4,10 @@ use strict;
 use warnings;
 
 use 5.010_001;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Carp;
 use Mojo::UserAgent;
-use Data::Printer;
 
 sub new {
     my ( $class, %args ) = @_;
@@ -94,6 +93,16 @@ sub price_message {
     return $self->_ua_post( '/tstat/pma', { line => $line, message => $message } );
 }
 
+sub clear_message {
+    my ($self) = @_;
+    return $self->_ua_post( '/tstat/pma', { mode => 0 } );
+}
+
+sub datalog {
+    my ($self) = @_;
+    return $self->_ua_get('/tstat/datalog');
+}
+
 sub _ua_post {
     my ( $self, $path, $data ) = @_;
     my $transaction
@@ -149,7 +158,7 @@ with WiFi are OEM versions manufactured by RTCOA.
 =head1 METHODS
 
 For additional information on the arguments and values returned see the
-L<RTCOA API documentation|http://www.radiothermostat.com/documents/RTCOAWiFIAPIV1_3.pdf>.
+L<RTCOA API documentation (pdf)|http://www.radiothermostat.com/documents/RTCOAWiFIAPIV1_3.pdf>.
 
 =head2 new( address=> 'http://192.168.1.1')
 
@@ -162,7 +171,7 @@ Retrieve a hash of lots of info on the current thermostat state.  Possible keys
 include: C<temp>, C<tmode>, C<fmode>, C<override>, C<hold>, C<t_heat>,
 C<t_cool>, C<it_heat>, C<It_cool>, C<a_heat>, C<a_cool>, C<a_mode>,
 C<t_type_post>, C<t_state>.  For a description of their values see the
-L<RTCOA API documentation|http://www.radiothermostat.com/documents/RTCOAWiFIAPIV1_3.pdf>.
+L<RTCOA API documentation (pdf)|http://www.radiothermostat.com/documents/RTCOAWiFIAPIV1_3.pdf>.
 
 =head2 set_mode($mode)
 
@@ -234,6 +243,23 @@ mentioned in the API docs and I'm not home currently.
 
 Clears the C<price_message> area.  May also clear the C<user_message>, I'd
 appreciate someone with a CT-80 letting me know.
+
+=head2 datalog
+
+Returns individual run times for heating and cooling yesterday and today.  This
+method isn't documented in the current API so it may go away in the future but
+does still work with the latest firmware. Sample data:
+
+    $data = {
+              'today' => {
+                         'cool_runtime' => { 'minute' => 29, 'hour' => 2 },
+                         'heat_runtime' => { 'minute' => 0,  'hour' => 0 }
+                       },
+              'yesterday' => {
+                         'heat_runtime' => { 'minute' => 0,  'hour' => 0 },
+                         'cool_runtime' => { 'minute' => 14, 'hour' => 0 }
+                       }
+            };
 
 =head1 AUTHOR
 

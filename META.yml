@@ -28,6 +28,6 @@ resources:
   bugtracker: https://github.com/mikegrb/Device-RadioThermostat/issues
   homepage: https://github.com/mikegrb/Device-RadioThermostat
   repository: https://github.com/mikegrb/Device-RadioThermostat.git
-version: 0.01
+version: 0.02
 x_contributors:
   - 'mikegrb <mgreb@linode.com>'
