@@ -5,9 +5,9 @@ author:
 build_requires:
   Test::More: 0.88
 configure_requires:
-  Module::Build::Tiny: 0.026
+  Module::Build::Tiny: 0.030
 dynamic_config: 0
-generated_by: 'Dist::Milla version v1.0.4, Dist::Zilla version 4.300038, CPAN::Meta::Converter version 2.131560'
+generated_by: 'Dist::Milla version v1.0.4, Dist::Zilla version 5.006, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -22,12 +22,14 @@ no_index:
     - eg
     - examples
 requires:
-  Mojolicious: 0
-  perl: 5.010001
+  JSON: 2
+  LWP::UserAgent: 0
+  perl: 5.008001
 resources:
   bugtracker: https://github.com/mikegrb/Device-RadioThermostat/issues
   homepage: https://github.com/mikegrb/Device-RadioThermostat
   repository: https://github.com/mikegrb/Device-RadioThermostat.git
-version: 0.02
+version: 0.03
 x_contributors:
+  - 'Philip Gladstone <philip@gladstonefamily.net>'
   - 'mikegrb <mgreb@linode.com>'

@@ -9,4 +9,5 @@ cpanfile
 dist.ini
 lib/Device/RadioThermostat.pm
 t/basic.t
+t/release-kwalitee.t
 t/release-pod-syntax.t
